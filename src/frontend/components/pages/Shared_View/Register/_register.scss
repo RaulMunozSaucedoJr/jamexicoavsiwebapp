@@ -1,0 +1,67 @@
+@use '../../../../assets/Scss/Utilities/Common/Colors'as color;
+
+@use '../../../../assets/Scss/Utilities/Font_Properties/Fonts'as font;
+@use '../../../../assets/Scss/Utilities/Font_Properties/Font_Sizes'as font_size;
+
+@use '../../../../assets/Scss/Utilities/Width_Height/Width_Height'as width_height;
+
+@use '../../../../assets/Scss/Utilities/Margin/Margin'as margin;
+@use '../../../../assets/Scss/Utilities/Padding/Padding'as padding;
+
+@use '../../../../assets/Scss/Utilities/Mixins/Mixins'as *;
+
+
+.first-register-user {
+    @include width_height(width_height.$w100, width_height.$vh100);
+    background-color: color.$White;
+
+    &-left {
+        @include width_height(width_height.$w50, width_height.$vh100);
+        background-color: color.$Inmersive_Blue_Black;
+        @include padding(padding.$Padding1);
+
+        h1 {
+            @include text(font.$Montserrat, font_size.$Large, color.$White);
+            @include padding(padding.$Padding1);
+            text-align: center;
+        }
+
+        a {
+            @include text(font.$Montserrat, font_size.$Medium, color.$White);
+            text-decoration: none;
+            text-align: center;
+        }
+    }
+
+    &-right {
+        @include width_height(width_height.$w50, width_height.$vh100);
+        background-color: color.$White;
+        background-image: url('/src/frontend/assets/images/jpg/Register.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .first-register-user-left {
+        @include width_height(width_height.$w100, width_height.$vh100);
+
+        h1 {
+            @include text(font.$Montserrat, font_size.$Medium, color.$White);
+            @include padding(padding.$Padding1);
+            text-align: center;
+        }
+
+        a {
+            @include text(font.$Montserrat, font_size.$Small, color.$White);
+            text-decoration: none;
+            text-align: center;
+        }
+
+    }
+
+    .first-register-user-right {
+        display: none;
+    }
+}

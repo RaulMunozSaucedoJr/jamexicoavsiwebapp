@@ -1,0 +1,27 @@
+.center {
+    display: grid;
+    place-content: center;
+}
+
+.flexSB {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mt-8 {
+    margin-top: 6em;
+}
+
+#map {
+    width: 50%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.img-thumbnail {
+    width: 17em;
+    width: 17em;
+    border-radius: 0;
+}

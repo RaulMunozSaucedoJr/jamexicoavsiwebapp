@@ -1,0 +1,32 @@
+@use '../../../../assets/Scss/Utilities/Common/Colors'as color;
+@use '../../../../assets/Scss/Utilities/Width_Height/Width_Height'as width_height;
+@use '../../../../assets/Scss/Utilities/Mixins/Mixins'as *;
+
+.contact-navbar {
+    @include width_height(width_height.$w5, width_height.$h20);
+    background-color: color.$Inmersive_Blue_Black;
+
+    position: fixed;
+    right: 0;
+    top: 30%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 1;
+
+    a {
+        display: block;
+        text-align: center;
+        padding: .3rem;
+        transition: all 0.3s ease;
+        color: color.$White;
+        font-size: 2em;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .contact-navbar {
+        display: none;
+    }
+}

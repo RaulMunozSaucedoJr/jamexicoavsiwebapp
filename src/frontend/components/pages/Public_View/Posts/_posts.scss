@@ -1,0 +1,52 @@
+@use '../../../../assets/Scss/Utilities/Common/Colors'as color;
+
+@use '../../../../assets/Scss/Utilities/Font_Properties/Fonts'as font;
+@use '../../../../assets/Scss/Utilities/Font_Properties/Font_Sizes'as font_size;
+
+@use '../../../../assets/Scss/Utilities/Width_Height/Width_Height'as width_height;
+
+@use '../../../../assets/Scss/Utilities/Margin/Margin'as margin;
+@use '../../../../assets/Scss/Utilities/Padding/Padding'as padding;
+
+@use '../../../../assets/Scss/Utilities/Mixins/Mixins'as *;
+
+.posts-left {
+    @include width_height(width_height.$w50, width_height.$vh100);
+    background-color: color.$Inmersive_Blue_Black;
+
+    h1 {
+        @include text(font.$Montserrat, font_size.$Large, color.$White);
+        @include padding(padding.$Padding1);
+        text-align: center;
+    }
+}
+
+.posts-right {
+    @include width_height(width_height.$w50, width_height.$vh100);
+    background-image: url("/src/frontend/assets/images/jpg/Blog.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .posts-left {
+        @include width_height(width_height.$w100, width_height.$vh100);
+        margin-bottom: 200px;
+
+        h1 {
+            @include text(font.$Montserrat, font_size.$General, color.$White);
+            @include padding(padding.$Padding1);
+            text-align: center;
+        }
+    }
+
+    .posts-right {
+        display: none;
+    }
+
+    .posts-bottom {
+        @include width_height(width_height.$w100, width_height.$vh100);
+        margin-bottom: 200px;
+    }
+}

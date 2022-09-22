@@ -1,0 +1,43 @@
+@use '../../../../assets/Scss/Utilities/Common/Colors'as color;
+
+@use '../../../../assets/Scss/Utilities/Font_Properties/Fonts'as font;
+@use '../../../../assets/Scss/Utilities/Font_Properties/Font_Sizes'as font_size;
+
+@use '../../../../assets/Scss/Utilities/Width_Height/Width_Height'as width_height;
+
+@use '../../../../assets/Scss/Utilities/Margin/Margin'as margin;
+@use '../../../../assets/Scss/Utilities/Padding/Padding'as padding;
+
+@use '../../../../assets/Scss/Utilities/Mixins/Mixins'as *;
+
+.mobile-nav {
+    background: color.$Empowered_Yellow;
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: color.$Inmersive_Blue_Black solid .2rem;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+
+    .bloc-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 30px;
+        }
+    }
+
+    z-index: 1;
+}
+
+@media screen and (min-width: 600px) {
+    .mobile-nav {
+        display: none;
+    }
+}

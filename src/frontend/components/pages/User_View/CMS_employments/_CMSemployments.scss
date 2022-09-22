@@ -1,0 +1,73 @@
+@use '../../../../assets/Scss/Utilities/Common/Colors'as color;
+
+@use '../../../../assets/Scss/Utilities/Font_Properties/Fonts'as font;
+@use '../../../../assets/Scss/Utilities/Font_Properties/Font_Sizes'as font_size;
+
+@use '../../../../assets/Scss/Utilities/Width_Height/Width_Height'as width_height;
+
+@use '../../../../assets/Scss/Utilities/Margin/Margin'as margin;
+@use '../../../../assets/Scss/Utilities/Padding/Padding'as padding;
+
+@use '../../../../assets/Scss/Utilities/Mixins/Mixins'as *;
+
+
+
+.employments-left {
+    @include width_height(width_height.$w50, width_height.$vh100);
+    background-color: color.$Inmersive_Blue_Black;
+    @include padding(padding.$Padding1);
+
+    h1 {
+        @include text(font.$Montserrat, font_size.$Large, color.$White);
+        @include padding(padding.$Padding1);
+        text-align: center;
+    }
+
+    a {
+        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+        text-decoration: none;
+        text-align: center;
+    }
+}
+
+.employments-right {
+    @include width_height(width_height.$w50, width_height.$vh100);
+    background-image: url('/src/frontend/assets/images/jpg/Employments.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.employments-bottom {
+    @include width_height(width_height.$w100, width_height.$h100);
+    margin-bottom: 30px;
+    background-color: color.$White;
+}
+
+@media only screen and (max-width: 600px) {
+    .employments-left {
+        @include width_height(width_height.$w100, width_height.$vh100);
+
+        h1 {
+            @include text(font.$Montserrat, font_size.$General, color.$White);
+            @include padding(padding.$Padding1);
+            text-align: center;
+            letter-spacing: 0
+        }
+
+        a {
+            @include text(font.$Montserrat, font_size.$Small, color.$White);
+            text-decoration: none;
+            text-align: center;
+        }
+    }
+
+    .employments-right {
+        display: none;
+    }
+
+    .employments-bottom {
+        @include width_height(width_height.$w100, width_height.$vh70);
+        padding-bottom: 50px;
+    }
+}

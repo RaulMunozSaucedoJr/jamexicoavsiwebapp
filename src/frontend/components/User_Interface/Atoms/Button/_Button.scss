@@ -1,0 +1,204 @@
+@use '../../../../assets/Scss/Utilities/Font_Properties/Fonts'as font;
+@use '../../../../assets/Scss/Utilities/Font_Properties/Font_Sizes'as font_size;
+@use '../../../../assets/Scss/Utilities/Font_Properties/Font_Properties'as font_properties;
+
+@use '../../../../assets/Scss/Utilities/Common/Colors'as color;
+@use '../../../../assets/Scss/Utilities/Mixins/Mixins'as *;
+
+.btn {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    text-align: center;
+
+    &-login {
+        background-color: color.$Empowered_Yellow;
+        @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
+        text-align: center;
+    }
+
+    &-submit,
+    &-filter,
+    &-open {
+        background-color: color.$Empowered_Yellow;
+        @include text(font.$Montserrat, font_size.$Medium, color.$Inmersive_Blue_Black);
+        text-align: center;
+        transition: .2s ease-in-out;
+
+        &:hover {
+            background-color: color.$Empowered_Yellow;
+            transition: .2s ease-in-out;
+            @include text(font.$Montserrat, font_size.$Medium, color.$Inmersive_Blue_Black);
+            cursor: pointer;
+        }
+    }
+
+    &-back {
+        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+        border: color.$White solid .2rem;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+            @include text(font.$Montserrat, font_size.$Medium, color.$White);
+            border: color.$White solid .2rem;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
+
+    &-close {
+        background-color: transparent;
+        border: color.$White solid .2em;
+        @include text(font.$Montserrat, font_size.$Small, color.$White);
+
+        &:hover {
+            transition: .2s ease-in-out;
+            cursor: pointer;
+        }
+    }
+
+    &-edit {
+        width: calc(100% / 2 - 1rem);
+        background-color: color.$Empowered_Orange;
+        @include text(font.$Montserrat, font_size.$Small, color.$White);
+        text-align: center;
+
+        &:hover {
+            background-color: color.$Empowered_Orange;
+            transition: .2s ease-in-out;
+            @include text(font.$Montserrat, font_size.$Small, color.$White);
+            cursor: pointer;
+        }
+    }
+
+    &-delete {
+        width: calc(100% / 2 - 1rem);
+        background-color: color.$Inmersive_Red;
+        @include text(font.$Montserrat, font_size.$Small, color.$White);
+        text-align: center;
+
+        &:hover {
+            background-color: color.$Inmersive_Red;
+            transition: .2s ease-in-out;
+            @include text(font.$Montserrat, font_size.$Small, color.$White);
+            cursor: pointer;
+        }
+    }
+
+    &-facebook {
+        background-color: color.$Facebook;
+        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+        text-align: center;
+
+        &:hover {
+            background-color: color.$Facebook;
+            transition: .2s ease-in-out;
+            @include text(font.$Montserrat, font_size.$Medium, color.$White);
+            cursor: pointer;
+        }
+    }
+
+    &-google {
+        background-color: color.$Google;
+        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+        text-align: center;
+
+        &:hover {
+            background-color: color.$Google;
+            transition: .2s ease-in-out;
+            @include text(font.$Montserrat, font_size.$Medium, color.$White);
+            cursor: pointer;
+        }
+    }
+
+    &-up {
+        position: fixed;
+        right: 0;
+        top: 70%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    &-transparent {
+        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+    }
+
+    @media only screen and (max-width: 37.5em) {
+        .btn {
+            width: calc(100% / 2);
+
+            &-login {
+                background-color: color.$Empowered_Yellow;
+                @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
+                text-align: center;
+            }
+
+            &-submit,
+            &-filter,
+            &-open {
+                background-color: color.$Empowered_Yellow;
+                @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
+                text-align: center;
+
+                &:hover {
+                    background-color: color.$Empowered_Yellow;
+                    transition: .2s ease-in-out;
+                    @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
+                    cursor: pointer;
+                }
+            }
+
+            &-close {
+                background-color: transparent;
+                border: color.$White solid .2em;
+                @include text(font.$Montserrat, font_size.$Small, color.$White);
+
+                &:hover {
+                    transition: .2s ease-in-out;
+                    cursor: pointer;
+                }
+            }
+
+            &-edit {
+                background-color: color.$Empowered_Orange;
+                @include text(font.$Montserrat, font_size.$Small, color.$White);
+                text-align: center;
+
+                &:hover {
+                    background-color: color.$Empowered_Orange;
+                    transition: .2s ease-in-out;
+                    @include text(font.$Montserrat, font_size.$Small, color.$White);
+                    cursor: pointer;
+                }
+            }
+
+            &-delete {
+                background-color: color.$Inmersive_Red;
+                @include text(font.$Montserrat, font_size.$Small, color.$White);
+                text-align: center;
+
+                &:hover {
+                    background-color: color.$Inmersive_Red;
+                    transition: .2s ease-in-out;
+                    @include text(font.$Montserrat, font_size.$Small, color.$White);
+                    cursor: pointer;
+                }
+            }
+
+            &-up {
+                position: fixed;
+                right: 0;
+                top: 70%;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+                z-index: 1;
+            }
+
+        }
+    }
+
+}
