@@ -19,18 +19,18 @@
     &-left {
         @include width_height(width_height.$w50, width_height.$vh100);
         background-color: color.$Inmersive_Blue_Black;
-        @include padding(padding.$Padding1);
+   
 
         h1 {
             @include text(font.$Montserrat, font_size.$Large, color.$White);
-            @include padding(padding.$Padding1);
-            text-align: center;
+            text-align: left;
+            letter-spacing: 0;
+            padding: 0;
         }
     }
 
     &-right {
         @include width_height(width_height.$w50, width_height.$vh100);
-        background-color: color.$White;
         background-image: url('/src/frontend/assets/images/jpg/Faqs.jpg');
         background-position: center;
         background-repeat: no-repeat;
@@ -47,11 +47,12 @@
 @media only screen and (max-width: 600px) {
     .faqs-left {
         @include width_height(width_height.$w100, width_height.$vh100);
-        @include padding(padding.$Padding2);
 
         h1 {
-            @include text(font.$Montserrat, font_size.$General, color.$White);
+            @include text(font.$Montserrat, font_size.$Medium, color.$White);
             text-align: center;
+            letter-spacing: 0;
+            padding: 0
         }
     }
 
@@ -66,6 +67,7 @@
     }
 
     .faqs-bottom-bottom {
-        @include padding(padding.$Padding1);
+        @include width_height(width_height.$w100, width_height.$vh100);
+        margin-bottom: 80px;
     }
 }

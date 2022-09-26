@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Input, Button } from "../../../Indexes/Atoms_Indexes";
-import { Tabs } from "../../../Indexes/Organisms_Index";
-import Bottom_navbar from "../../../User_Interface/Organisms/Bottom_Navbar/Bottom_navbar";
-import app from "../../../../../backend/Firebase/Firebase-config.js";
 
+import { Tabs } from "../../../Indexes/OrganismsIndex";
+import { Button, Input } from "../../../Indexes/AtomsIndexes";
+
+import app from "../../../../../backend/Firebase/Firebase-config.js";
 import {
   getFirestore,
   collection,
@@ -15,14 +15,21 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
-
 const db = getFirestore(app);
 
-const Tips = () => {
+const User_profile = () => {
+  const current = new Date();
+  const date = `${current.getDate()}/${
+    current.getMonth() + 1
+  }/${current.getFullYear()}`;
+
   const initialValue = {
-    title: "",
-    category: "",
-    descripcion: "",
+    user: "",
+    password: "",
+    complete_name: "",
+    email: "",
+    date: "",
+    role: "",
   };
 
   //Variables de estado
@@ -40,14 +47,14 @@ const Tips = () => {
 
     if (subid === "") {
       try {
-        await addDoc(collection(db, "tips"), {
+        await addDoc(collection(db, "users"), {
           ...post,
         });
       } catch (error) {
         console.log(error);
       }
     } else {
-      await setDoc(doc(db, "tips", subid), {
+      await setDoc(doc(db, "users", subid), {
         ...post,
       });
     }
@@ -59,7 +66,7 @@ const Tips = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "tips"));
+        const querySnapshot = await getDocs(collection(db, "users"));
         const docs = [];
         querySnapshot.forEach((doc) => {
           docs.push({ ...doc.data(), id: doc.id });
@@ -74,13 +81,13 @@ const Tips = () => {
 
   //Function to delete posts
   const deletePost = async (id) => {
-    await deleteDoc(doc(db, "tips", id));
+    await deleteDoc(doc(db, "users", id));
   };
 
   //Function to update posts
   const getOne = async (id) => {
     try {
-      const docRef = doc(db, "tips", id);
+      const docRef = doc(db, "users", id);
       const docSnap = await getDoc(docRef);
       setPost(docSnap.data());
     } catch (error) {
@@ -93,35 +100,36 @@ const Tips = () => {
       getOne(subid);
     }
   }, [subid]);
+
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-6 tips-left center">
-          <h1>Manejador de tips laborales</h1>
+        <div className="col-sm-12 col-md-6 user-profile-left center">
+          <h1>Perfil de usuario</h1>
           <Link to="/">
             <Button
-              id="button"
-              text="Regresar al home"
               className="btn btn-open"
+              text="Volver al inicio"
               type="button"
+              id="button"
             />
           </Link>
         </div>
-        <div className="col-sm-12 col-md-6 tips-right"></div>
-        <div className="col-sm-12 col-md-12 tips-bottom pt-5">
+        <div className="col-sm-12 col-md-6 user-profile-right"></div>
+        <div className="col-sm-12 col-md-6 user-profile-bottom mb-5 mt-5 pb-2">
           <Tabs>
-            <div label="Registrar tips">
+            <div label="Registrar usuario">
               <form onSubmit={savePosts}>
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
-                    label="Titulo"
-                    placeholder="Titulo"
+                    label="Usuario"
+                    placeholder="Usuario"
                     type="text"
                     className="form-control"
-                    name="title"
-                    id="title"
-                    value={post.title}
+                    name="user"
+                    id="user"
+                    value={post.user}
                     onChange={handleInputs}
                     required
                   />
@@ -129,13 +137,28 @@ const Tips = () => {
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
-                    label="Categoria"
-                    placeholder="Categoria"
+                    label="Contraseña"
+                    placeholder="Contraseña"
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    id="password"
+                    value={post.password}
+                    onChange={handleInputs}
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+                <div className="form-group pt-3">
+                  <Input
+                    titleLabel="form-label label-inmersive-blue"
+                    label="Nombre completo"
+                    placeholder="Nombre completo"
                     type="text"
                     className="form-control"
-                    name="category"
-                    id="category"
-                    value={post.category}
+                    name="complete_name"
+                    id="complete_name"
+                    value={post.complete_name}
                     onChange={handleInputs}
                     required
                   />
@@ -143,14 +166,37 @@ const Tips = () => {
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
-                    label="Descripcion"
-                    placeholder="Descripcion"
-                    type="text"
+                    label="Correo electronico"
+                    placeholder="Correo electronico"
+                    type="email"
                     className="form-control"
-                    name="descripcion"
-                    id="descripcion"
-                    value={post.descripcion}
+                    name="email"
+                    id="email"
+                    value={post.email}
                     onChange={handleInputs}
+                    required
+                  />
+                </div>
+                <div className="form-group pt-3">
+                  <label htmlFor="form-select">Seleccione un rol</label>
+                  <select className="form-select" id="form-select">
+                    <option value="">Seleccione un rol de usuario</option>
+                    <option value="1">Administrador</option>
+                    <option value="2">Usuario</option>
+                  </select>
+                </div>
+                <div className="form-group pt-3">
+                  <Input
+                    titleLabel="form-label label-inmersive-blue"
+                    label="Fecha de registro"
+                    placeholder=""
+                    type="email"
+                    className="form-control"
+                    name="date"
+                    id="date"
+                    value={date}
+                    onChange={handleInputs}
+                    readOnly="readOnly"
                     required
                   />
                 </div>
@@ -161,23 +207,29 @@ const Tips = () => {
                 </div>
               </form>
             </div>
-            <div label="Tabla de tips">
-              <div class="table-responsive-xxl">
+            <div label="Tabla de usuarios">
+              <div class="table-responsive">
                 <table class="table table-hover">
                   <thead>
-                    <th scope="col">#</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Acciones</th>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Usuario</th>
+                      <th scope="col">Contraseña</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Correo</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="table-group-divider">
                     {lista.map((list) => (
                       <tr>
                         <th scope="row" key={list.id}></th>
-                        <td>{list.title}</td>
-                        <td>{list.category}</td>
-                        <td>{list.descripcion}</td>
+                        <td>{list.user}</td>
+                        <td>{list.password}</td>
+                        <td>{list.complete_name}</td>
+                        <td>{list.email}</td>
+                        <td>{list.date}</td>
                         <td>
                           <Button
                             id="button"
@@ -202,10 +254,9 @@ const Tips = () => {
             </div>
           </Tabs>
         </div>
-        <Bottom_navbar />
       </div>
     </div>
   );
 };
 
-export default Tips;
+export default User_profile;

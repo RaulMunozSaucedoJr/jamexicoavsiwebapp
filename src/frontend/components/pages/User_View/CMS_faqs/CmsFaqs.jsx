@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Input, Button } from "../../../Indexes/Atoms_Indexes";
-import { Tabs } from "../../../Indexes/Organisms_Index";
+import { Input, Button } from "../../../Indexes/AtomsIndexes";
+import { Tabs } from "../../../Indexes/OrganismsIndex";
 
 import Delete from "../../../../assets/images/png/delete.png";
 import Edit from "../../../../assets/images/png/edit.png";
 
-import Bottom_navbar from "../../../User_Interface/Organisms/Bottom_Navbar/Bottom_navbar";
 import app from "../../../../../backend/Firebase/Firebase-config.js";
 import {
   getFirestore,
@@ -99,21 +98,21 @@ const CMS_faqs = () => {
   }, [subid]);
 
   return (
-    <div className="container-fluCMS_fd faqs">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-6 center faqs-left">
+        <div className="col-sm-12 col-md-6 faqs-left center">
           <h1>Manejador de preguntas frecuentes</h1>
           <Link to="/">
             <Button
               id="button"
               text="Volver al inicio"
-              className="btn btn-open mt-4"
+              className="btn btn-open"
               type="button"
             />
           </Link>
         </div>
-        <div className="col-sm-12 col-md-6 center faqs-right"></div>
-        <div className="col-sm-12 col-md-12 faqs-bottom pt-5">
+        <div className="col-sm-12 col-md-6 faqs-right"></div>
+        <div className="col-sm-12 col-md-12 faqs-bottom">
           <div>
             <Tabs>
               <div label="Registrar Preguntas">
@@ -154,18 +153,18 @@ const CMS_faqs = () => {
                 </form>
               </div>
               <div label="Tabla de Preguntas">
-                <div class="table-responsive-xxl">
-                  <table class="table table-hover">
+                <div className="table-responsive-xxl">
+                  <table className="table table-hover">
                     <thead>
-                      <th scope="col">#</th>
-                      <th scope="col">Pregunta</th>
-                      <th scope="col">Respuesta</th>
-                      <th scope="col">Acciones</th>
+                      <th>#</th>
+                      <th>Pregunta</th>
+                      <th>Respuesta</th>
+                      <th>Acciones</th>
                     </thead>
                     <tbody>
                       {lista.map((list) => (
                         <tr>
-                          <th scope="row" key={list.id}></th>
+                          <td key={list.id}></td>
                           <td>{list.pregunta}</td>
                           <td>{list.respuesta}</td>
                           <td>
@@ -202,7 +201,6 @@ const CMS_faqs = () => {
           </div>
         </div>
       </div>
-      <Bottom_navbar />
     </div>
   );
 };

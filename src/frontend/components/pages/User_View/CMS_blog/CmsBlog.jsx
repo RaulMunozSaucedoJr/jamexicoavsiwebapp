@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Input } from "../../../Indexes/Atoms_Indexes";
-import { Tabs } from "../../../Indexes/Organisms_Index";
-
-import Bottom_navbar from "../../../User_Interface/Organisms/Bottom_Navbar/Bottom_navbar";
+import { Button, Input } from "../../../Indexes/AtomsIndexes";
+import { Tabs } from "../../../Indexes/OrganismsIndex";
 import app from "../../../../../backend/Firebase/Firebase-config.js";
 
 import {
@@ -19,36 +17,45 @@ import {
 
 const db = getFirestore(app);
 
-const Employments = () => {
+const Blog = () => {
+
+ /* A constant that is used to reset the form. */
   const initialValue = {
     title: "",
     category: "",
-    descripcion: "",
+    content: "",
   };
 
-  //Variables de estado
+/* A hook that allows you to use state in functional components. */
   const [post, setPost] = useState(initialValue);
   const [lista, setList] = useState([]);
   const [subid, setSubid] = useState("");
 
+  /**
+   * The handleInputs function takes an event as an argument, and then sets the state of the post
+   * object to the value of the event target.
+   */
   const handleInputs = (e) => {
     const { name, value } = e.target;
     setPost({ ...post, [name]: value });
   };
-  //Function to save post and update
+
+ /**
+  * If the subid is empty, then add a new document to the collection, otherwise update the document.
+  */
   const savePosts = async (e) => {
     e.preventDefault();
 
     if (subid === "") {
       try {
-        await addDoc(collection(db, "trabajos"), {
+        await addDoc(collection(db, "blog"), {
           ...post,
         });
       } catch (error) {
         console.log(error);
       }
     } else {
-      await setDoc(doc(db, "trabajos", subid), {
+      await setDoc(doc(db, "blog", subid), {
         ...post,
       });
     }
@@ -56,11 +63,11 @@ const Employments = () => {
     setSubid("");
   };
 
-  //Function to render posts list
+  /* A hook that allows you to use state in functional components. */
   useEffect(() => {
     const getList = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "trabajos"));
+        const querySnapshot = await getDocs(collection(db, "blog"));
         const docs = [];
         querySnapshot.forEach((doc) => {
           docs.push({ ...doc.data(), id: doc.id });
@@ -73,15 +80,20 @@ const Employments = () => {
     getList();
   }, [lista]);
 
-  //Function to delete posts
+/**
+ * It deletes a document from the database.
+ */
+
   const deletePost = async (id) => {
-    await deleteDoc(doc(db, "trabajos", id));
+    await deleteDoc(doc(db, "blog", id));
   };
 
-  //Function to update posts
+/**
+ * It gets a document from the database and sets the state of the post to the data of the document.
+ */
   const getOne = async (id) => {
     try {
-      const docRef = doc(db, "trabajos", id);
+      const docRef = doc(db, "blog", id);
       const docSnap = await getDoc(docRef);
       setPost(docSnap.data());
     } catch (error) {
@@ -89,6 +101,7 @@ const Employments = () => {
     }
   };
 
+  /* A hook that allows you to use state in functional components. */
   useEffect(() => {
     if (subid !== "") {
       getOne(subid);
@@ -98,8 +111,8 @@ const Employments = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-6 employments-left center">
-          <h1>Manejador de empleos</h1>
+        <div className="col-sm-12 col-md-6 blog-left center">
+          <h1>Manejador de post's</h1>
           <Link to="/">
             <Button
               id="button"
@@ -109,12 +122,10 @@ const Employments = () => {
             />
           </Link>
         </div>
-
-        <div className="col-sm-12 col-md-6 employments-right"></div>
-
-        <div className="col-sm-12 col-md-12 employments-bottom pt-5">
+        <div className="col-sm-12 col-md-6 blog-right"></div>
+        <div className="col-sm-12 col-md-12 blog-bottom pt-5">
           <Tabs>
-            <div label="Registrar trabajos">
+            <div label="Registrar posts">
               <form onSubmit={savePosts}>
                 <div className="form-group pt-3">
                   <Input
@@ -147,13 +158,13 @@ const Employments = () => {
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
-                    label="Descripcion"
-                    placeholder="Descripcion"
+                    label="Contenido"
+                    placeholder="Contenido"
                     type="text"
                     className="form-control"
-                    name="descripcion"
-                    id="descripcion"
-                    value={post.descripcion}
+                    name="content"
+                    id="content"
+                    value={post.content}
                     onChange={handleInputs}
                     required
                   />
@@ -165,16 +176,16 @@ const Employments = () => {
                 </div>
               </form>
             </div>
-            <div label="Tabla de trabajos">
-              <div class="table-responsive-xxl">
-                <table class="table table-hover">
+            <div label="Tabla de posts">
+              <div className="table-responsive">
+                <table className="table table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Titulo</th>
-                      <th scope="col">Categoria</th>
-                      <th scope="col">Descripcion</th>
-                      <th scope="col">Acciones</th>
+                      <th>#</th>
+                      <th>Titulo</th>
+                      <th>Categoria</th>
+                      <th>Contenido</th>
+                      <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -183,7 +194,7 @@ const Employments = () => {
                         <th scope="row" key={list.id}></th>
                         <td>{list.title}</td>
                         <td>{list.category}</td>
-                        <td>{list.descripcion}</td>
+                        <td>{list.content}</td>
                         <td>
                           <Button
                             id="button"
@@ -208,10 +219,9 @@ const Employments = () => {
             </div>
           </Tabs>
         </div>
-        <Bottom_navbar />
       </div>
     </div>
   );
 };
 
-export default Employments;
+export default Blog;

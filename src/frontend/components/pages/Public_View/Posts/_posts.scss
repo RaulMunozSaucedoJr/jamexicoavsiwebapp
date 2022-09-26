@@ -16,8 +16,9 @@
 
     h1 {
         @include text(font.$Montserrat, font_size.$Large, color.$White);
-        @include padding(padding.$Padding1);
         text-align: center;
+        letter-spacing: 0;
+        padding: 0;
     }
 }
 
@@ -32,12 +33,12 @@
 @media only screen and (max-width: 600px) {
     .posts-left {
         @include width_height(width_height.$w100, width_height.$vh100);
-        margin-bottom: 200px;
 
         h1 {
-            @include text(font.$Montserrat, font_size.$General, color.$White);
-            @include padding(padding.$Padding1);
+            @include text(font.$Montserrat, font_size.$Medium, color.$White);
             text-align: center;
+            letter-spacing: 0;
+            padding: 0
         }
     }
 
@@ -47,6 +48,6 @@
 
     .posts-bottom {
         @include width_height(width_height.$w100, width_height.$vh100);
-        margin-bottom: 200px;
+        margin-bottom: 300px;
     }
 }

@@ -52,14 +52,13 @@
 
             h1 {
                 @include text(font.$Montserrat, font_size.$Medium, color.$White);
-                @include padding(padding.$Padding1);
-                text-align: left;
+                text-align: center;
+                letter-spacing: 0;
+                padding: 0
             }
-
-            
         }
 
-        &-right{
+        &-right {
             display: none;
         }
     }

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-import { Tabs } from "../../../Indexes/Organisms_Index";
-import Card from "../../../User_Interface/Organisms/Card/Card";
-import { Button, Input } from "../../../Indexes/Atoms_Indexes";
-
-import Profile from "../../../../assets/images/jpg/profile.jpg";
-
+import { Button, Input } from "../../../Indexes/AtomsIndexes";
+import { Tabs } from "../../../Indexes/OrganismsIndex";
 import app from "../../../../../backend/Firebase/Firebase-config.js";
+
 import {
   getFirestore,
   collection,
@@ -18,46 +14,49 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
+
 const db = getFirestore(app);
 
-const User_profile = () => {
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
-
+const Employments = () => {
+ /* A constant that is used to reset the form. */
   const initialValue = {
-    user: "",
-    password: "",
-    complete_name: "",
-    email: "",
-    date: "",
-    role: "",
+    title: "",
+    category: "",
+    descripcion: "",
   };
 
-  //Variables de estado
+  /* A hook that is used to update the state of the component. */
+  
   const [post, setPost] = useState(initialValue);
   const [lista, setList] = useState([]);
   const [subid, setSubid] = useState("");
 
+/**
+ * The handleInputs function takes an event as an argument, and then sets the state of the post object
+ * to the value of the event target.
+ */
   const handleInputs = (e) => {
     const { name, value } = e.target;
     setPost({ ...post, [name]: value });
   };
-  //Function to save post and update
+  
+  
+/**
+ * If the subid is empty, then add a new document to the collection, otherwise update the document.
+ */
   const savePosts = async (e) => {
     e.preventDefault();
 
     if (subid === "") {
       try {
-        await addDoc(collection(db, "users"), {
+        await addDoc(collection(db, "trabajos"), {
           ...post,
         });
       } catch (error) {
         console.log(error);
       }
     } else {
-      await setDoc(doc(db, "users", subid), {
+      await setDoc(doc(db, "trabajos", subid), {
         ...post,
       });
     }
@@ -65,11 +64,12 @@ const User_profile = () => {
     setSubid("");
   };
 
-  //Function to render posts list
+
+/* A hook that is used to update the state of the component. */
   useEffect(() => {
     const getList = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "users"));
+        const querySnapshot = await getDocs(collection(db, "trabajos"));
         const docs = [];
         querySnapshot.forEach((doc) => {
           docs.push({ ...doc.data(), id: doc.id });
@@ -82,15 +82,21 @@ const User_profile = () => {
     getList();
   }, [lista]);
 
-  //Function to delete posts
+/**
+ * DeletePost is a function that takes an id as an argument and deletes a document from the trabajos
+ * collection in the database.
+ */
   const deletePost = async (id) => {
-    await deleteDoc(doc(db, "users", id));
+    await deleteDoc(doc(db, "trabajos", id));
   };
 
-  //Function to update posts
+  
+/**
+ * It gets a document from a collection in a Firestore database.
+ */
   const getOne = async (id) => {
     try {
-      const docRef = doc(db, "users", id);
+      const docRef = doc(db, "trabajos", id);
       const docSnap = await getDoc(docRef);
       setPost(docSnap.data());
     } catch (error) {
@@ -98,6 +104,7 @@ const User_profile = () => {
     }
   };
 
+/* A hook that is used to update the state of the component. */
   useEffect(() => {
     if (subid !== "") {
       getOne(subid);
@@ -107,32 +114,34 @@ const User_profile = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-6 user-profile-left center">
-          <h1>Perfil de usuario</h1>
+        <div className="col-sm-12 col-md-6 employments-left center">
+          <h1>Manejador de empleos</h1>
           <Link to="/">
             <Button
-              className="btn btn-open"
-              text="Regresar al home"
-              type="button"
               id="button"
+              text="Volver al inicio"
+              className="btn btn-open"
+              type="button"
             />
           </Link>
         </div>
-        <div className="col-sm-12 col-md-6 user-profile-right"></div>
-        <div className="col-sm-12 col-md-6 user-profile-bottom mb-5 mt-5 pb-2">
+
+        <div className="col-sm-12 col-md-6 employments-right"></div>
+
+        <div className="col-sm-12 col-md-12 employments-bottom pt-5">
           <Tabs>
-            <div label="Registrar usuario">
+            <div label="Registrar trabajos">
               <form onSubmit={savePosts}>
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
-                    label="Usuario"
-                    placeholder="Usuario"
+                    label="Titulo"
+                    placeholder="Titulo"
                     type="text"
                     className="form-control"
-                    name="user"
-                    id="user"
-                    value={post.user}
+                    name="title"
+                    id="title"
+                    value={post.title}
                     onChange={handleInputs}
                     required
                   />
@@ -140,28 +149,13 @@ const User_profile = () => {
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
-                    label="Contraseña"
-                    placeholder="Contraseña"
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    id="password"
-                    value={post.password}
-                    onChange={handleInputs}
-                    autoComplete="off"
-                    required
-                  />
-                </div>
-                <div className="form-group pt-3">
-                  <Input
-                    titleLabel="form-label label-inmersive-blue"
-                    label="Nombre completo"
-                    placeholder="Nombre completo"
+                    label="Categoria"
+                    placeholder="Categoria"
                     type="text"
                     className="form-control"
-                    name="complete_name"
-                    id="complete_name"
-                    value={post.complete_name}
+                    name="category"
+                    id="category"
+                    value={post.category}
                     onChange={handleInputs}
                     required
                   />
@@ -169,37 +163,14 @@ const User_profile = () => {
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
-                    label="Correo electronico"
-                    placeholder="Correo electronico"
-                    type="email"
+                    label="Descripcion"
+                    placeholder="Descripcion"
+                    type="text"
                     className="form-control"
-                    name="email"
-                    id="email"
-                    value={post.email}
+                    name="descripcion"
+                    id="descripcion"
+                    value={post.descripcion}
                     onChange={handleInputs}
-                    required
-                  />
-                </div>
-                <div className="form-group pt-3">
-                  <label htmlFor="form-select">Seleccione un rol</label>
-                  <select class="form-select" id="form-select">
-                    <option value="">Seleccione un rol de usuario</option>
-                    <option value="1">Administrador</option>
-                    <option value="2">Usuario</option>
-                  </select>
-                </div>
-                <div className="form-group pt-3">
-                  <Input
-                    titleLabel="form-label label-inmersive-blue"
-                    label="Fecha de registro"
-                    placeholder=""
-                    type="email"
-                    className="form-control"
-                    name="date"
-                    id="date"
-                    value={date}
-                    onChange={handleInputs}
-                    readonly="readonly"
                     required
                   />
                 </div>
@@ -210,29 +181,25 @@ const User_profile = () => {
                 </div>
               </form>
             </div>
-            <div label="Tabla de usuarios">
-              <div class="table-responsive">
+            <div label="Tabla de trabajos">
+              <div class="table-responsive-xxl">
                 <table class="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Usuario</th>
-                      <th scope="col">Contraseña</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Correo</th>
-                      <th scope="col">Fecha</th>
+                      <th scope="col">Titulo</th>
+                      <th scope="col">Categoria</th>
+                      <th scope="col">Descripcion</th>
                       <th scope="col">Acciones</th>
                     </tr>
                   </thead>
-                  <tbody className="table-group-divider">
+                  <tbody>
                     {lista.map((list) => (
                       <tr>
                         <th scope="row" key={list.id}></th>
-                        <td>{list.user}</td>
-                        <td>{list.password}</td>
-                        <td>{list.complete_name}</td>
-                        <td>{list.email}</td>
-                        <td>{list.date}</td>
+                        <td>{list.title}</td>
+                        <td>{list.category}</td>
+                        <td>{list.descripcion}</td>
                         <td>
                           <Button
                             id="button"
@@ -262,4 +229,4 @@ const User_profile = () => {
   );
 };
 
-export default User_profile;
+export default Employments;

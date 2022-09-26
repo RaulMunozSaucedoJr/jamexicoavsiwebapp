@@ -1,24 +1,19 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-
+import {
+  initializeApp
+} from "firebase/app";
+import {
+  getAuth
+} from "firebase/auth";
+/* Initializing the firebase app. */
 const firebaseConfig = {
-  apiKey: "AIzaSyBTOu2p-8ki693Y4VObUkDunZs36lAhtGg",
-  authDomain: "juventudes-8becb.firebaseapp.com",
-  projectId: "juventudes-8becb",
-  storageBucket: "juventudes-8becb.appspot.com",
-  messagingSenderId: "121232322413",
-  appId: "1:121232322413:web:3b9865322717a732c13464"
+  apiKey: "AIzaSyDR4FnikrKnuzIK3hdrRUb4JlCTFLTKjoU",
+  authDomain: "rolesauth-5a1ba.firebaseapp.com",
+  projectId: "rolesauth-5a1ba",
+  storageBucket: "rolesauth-5a1ba.appspot.com",
+  messagingSenderId: "292643430696",
+  appId: "1:292643430696:web:b5bd323dcfccae7766b01d"
 };
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 export default app;
-
-/*
- apiKey: "AIzaSyBTOu2p-8ki693Y4VObUkDunZs36lAhtGg",
-  authDomain: "juventudes-8becb.firebaseapp.com",
-  projectId: "juventudes-8becb",
-  storageBucket: "juventudes-8becb.appspot.com",
-  messagingSenderId: "121232322413",
-  appId: "1:121232322413:web:3b9865322717a732c13464"
-*/

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-
-import Navbar from "../../../User_Interface/Organisms/Navbar/Navbar";
-import Contact_Navbar from "../../../User_Interface/Organisms/Contact_Navbar/Contact_Navbar";
-import Bottom_navbar from "../../../User_Interface/Organisms/Bottom_Navbar/Bottom_navbar";
 import Card from "../../../User_Interface/Organisms/Card/Card";
-import Accordion from "../../../User_Interface/Organisms/Accordion/Accordion";
-
+import { Button } from "../../../Indexes/AtomsIndexes";
+import UserView from "../../UserView";
+import AdminView from "../../AdminView";
 import Blog from "../../../../assets/images/jpg/Blog.jpg";
 import Job from "../../../../assets/images/jpg/Job.jpg";
 import Tips from "../../../../assets/images/jpg/Tips.jpg";
@@ -14,10 +11,13 @@ import Live from "../../../../assets/images/jpg/live.jpg";
 import CV from "../../../../assets/images/jpg/cv.jpg";
 
 import app from "../../../../../backend/Firebase/Firebase-config.js";
+import { getAuth, signOut } from "firebase/auth";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-const Home = () => {
+const Home = ({ user }) => {
+  
   const [lista, setList] = useState([]);
   useEffect(() => {
     const getList = async () => {
@@ -40,13 +40,20 @@ const Home = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <Navbar />
-
-        <Contact_Navbar />
-
-        <Bottom_navbar />
-
         <div className="col-sm-12 col-md-6 about-us-left center">
+          <div className="row">
+            <div className="col-12 sticky-top">
+              <div className="alert alert-success" role="alert">
+                {user.rol === "admin" ? <AdminView /> : <UserView />}
+                <Button
+                  className="btn btn-open"
+                  onClick={() => signOut(auth)}
+                  text="Logout"
+                />
+              </div>
+            </div>
+          </div>
+
           <h1>Juventudes</h1>
           <p>
             Somos una plataforma encargada de apoyar a los jovenes su primer
@@ -134,16 +141,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        <div className="col-sm-12 col-md-6 faqs-left">
-          <h1>Preguntas Frecuentes</h1>
-          <div className="accordion">
-            {lista.map(({pregunta, respuesta}) => (
-              <Accordion pregunta={pregunta} respuesta={respuesta} />
-            ))}
-          </div>
-        </div>
-        <div className="col-sm-12 col-md-6 faqs-right"></div>
       </div>
     </div>
   );

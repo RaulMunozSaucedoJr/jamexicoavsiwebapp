@@ -1,0 +1,16 @@
+  <div className="col-sm-12 col-md-12">
+                <Button
+                  id="modal"
+                  text="Google"
+                  className="btn btn-google mt-2"
+                  type="button"
+                  onClick={handleGoogleSignIn}
+                />
+                <Button
+                  id="modal"
+                  text="Facebook"
+                  className="btn btn-facebook mt-2"
+                  type="button"
+                  onClick={signInWithFacebook}
+                />
+              </div>

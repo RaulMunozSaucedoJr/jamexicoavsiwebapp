@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../../../../context/AuthContext.js";
-import { Button } from "../../../Indexes/Atoms_Indexes";
+import { Button } from "../../../Indexes/AtomsIndexes";
 
 export const Navbar = () => {
   const { user, logOut } = UserAuth();

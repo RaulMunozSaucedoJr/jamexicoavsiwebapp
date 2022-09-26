@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Input, Button } from "../../../Indexes/Atoms_Indexes";
+import { Input, Button } from "../../../Indexes/AtomsIndexes";
 
 const Register = () => {
   return (

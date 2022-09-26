@@ -13,7 +13,7 @@
     @include width_height(width_height.$w100, width_height.$h100);
     background-color: color.$White;
     border: color.$Inmersive_Blue_Black solid .2em;
-    border-radius: 0;
+    border-radius: .5em;
 
     img {
         width: 100%;

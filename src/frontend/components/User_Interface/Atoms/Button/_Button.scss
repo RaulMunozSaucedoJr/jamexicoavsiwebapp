@@ -8,7 +8,7 @@
 .btn {
     width: 100%;
     height: auto;
-    border-radius: 0;
+    border-radius: .5em;
     text-align: center;
 
     &-login {
@@ -201,4 +201,35 @@
         }
     }
 
+}
+
+@media only screen and (max-width: 600px) {
+    .btn {
+        width: 100%;
+        height: auto;
+        border-radius: .5em;
+        text-align: center;
+
+        &-login {
+            background-color: color.$Empowered_Yellow;
+            @include text(font.$Montserrat, font_size.$Extra_Small, color.$Inmersive_Blue_Black);
+            text-align: center;
+        }
+
+        &-submit,
+        &-filter,
+        &-open {
+            background-color: color.$Empowered_Yellow;
+            @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
+            text-align: center;
+            transition: .2s ease-in-out;
+
+            &:hover {
+                background-color: color.$Empowered_Yellow;
+                transition: .2s ease-in-out;
+                @include text(font.$Montserrat, font_size.$Extra_Small, color.$Inmersive_Blue_Black);
+                cursor: pointer;
+            }
+        }
+    }
 }

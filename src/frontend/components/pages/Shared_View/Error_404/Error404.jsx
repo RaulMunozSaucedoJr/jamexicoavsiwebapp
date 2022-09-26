@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../../Indexes/Atoms_Indexes";
+import { Button } from "../../../Indexes/AtomsIndexes";
 import { Link } from "react-router-dom";
 const Error_404 = () => {
   return (

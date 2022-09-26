@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({id, name, className,  value, type, placeholder, titleLabel, label, autoComplete, onChange, disabled, readonly}) => {
+const Input = ({id, name, className,  value, type, placeholder, titleLabel, label, autoComplete, onChange, disabled, readOnly}) => {
     return (
         <>
             <div className="form-group">
@@ -15,7 +15,7 @@ const Input = ({id, name, className,  value, type, placeholder, titleLabel, labe
                     value={value}
                     autoComplete={autoComplete}
                     onChange={(e) => onChange(e)}
-                    readonly={readonly}
+                    readOnly={readOnly}
                     required
                 />
             </div>
