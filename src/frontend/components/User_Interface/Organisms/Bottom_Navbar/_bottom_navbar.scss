@@ -82,3 +82,10 @@
     display: block;
     color: black !important;
 }
+
+
+@media only screen and (min-width: 600px) {
+    .mobile-nav{
+        display: none;
+    }
+}

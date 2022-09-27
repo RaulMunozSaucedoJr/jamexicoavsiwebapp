@@ -31,6 +31,7 @@
 @use '../../../components/User_Interface/Atoms/Spinner/Spinner';
 @use '../../../components/User_Interface/Atoms/Subtitle/Subtitle';
 @use '../../../components/User_Interface/Atoms/Textarea/Text_Area';
+@use '../../../components/User_Interface/Atoms/Tags/tags';
 /* //!Moleculs folder */
 
 /* //!Organisms */
@@ -53,10 +54,10 @@
 @use '../../../components/pages/User_View/CMS_tips/CMStips';
 @use '../../../components/pages/Shared_View/Error_404/error_404';
 @use '../../../components/pages/User_View/CMS_profile_user/Userprofile';
-
 @use '../../../components/pages/Public_View/Posts/posts';
 @use '../../../components/pages/Public_View/Jobs/jobs';
 @use '../../../components/pages/Public_View/Tips/tips';
 @use '../../../components/pages/Public_View/Profile/profile';
-
+@use '../../../components/pages/User_View/CMS_Resumes/ResumeCreator';
 @use '../../../components/pages/Shared_View/Recover_Password/recoverpassword';
+@use '../../../components/pages/User_View/Chat/chat';

@@ -15,18 +15,18 @@ import {
   setDoc,
 } from "firebase/firestore";
 
+/* Getting the database. */
 const db = getFirestore(app);
 
 const Blog = () => {
-
- /* A constant that is used to reset the form. */
+  /* A constant that is used to reset the form. */
   const initialValue = {
     title: "",
     category: "",
     content: "",
   };
 
-/* A hook that allows you to use state in functional components. */
+  /* A hook that allows you to use state in functional components. */
   const [post, setPost] = useState(initialValue);
   const [lista, setList] = useState([]);
   const [subid, setSubid] = useState("");
@@ -40,22 +40,22 @@ const Blog = () => {
     setPost({ ...post, [name]: value });
   };
 
- /**
-  * If the subid is empty, then add a new document to the collection, otherwise update the document.
-  */
+  /**
+   * If the subid is empty, then add a new document to the collection, otherwise update the document.
+   */
   const savePosts = async (e) => {
     e.preventDefault();
 
     if (subid === "") {
       try {
-        await addDoc(collection(db, "blog"), {
+        await addDoc(collection(db, "posts"), {
           ...post,
         });
       } catch (error) {
         console.log(error);
       }
     } else {
-      await setDoc(doc(db, "blog", subid), {
+      await setDoc(doc(db, "b", subid), {
         ...post,
       });
     }
@@ -67,7 +67,7 @@ const Blog = () => {
   useEffect(() => {
     const getList = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "blog"));
+        const querySnapshot = await getDocs(collection(db, "posts"));
         const docs = [];
         querySnapshot.forEach((doc) => {
           docs.push({ ...doc.data(), id: doc.id });
@@ -80,20 +80,20 @@ const Blog = () => {
     getList();
   }, [lista]);
 
-/**
- * It deletes a document from the database.
- */
+  /**
+   * It deletes a document from the database.
+   */
 
   const deletePost = async (id) => {
-    await deleteDoc(doc(db, "blog", id));
+    await deleteDoc(doc(db, "posts", id));
   };
 
-/**
- * It gets a document from the database and sets the state of the post to the data of the document.
- */
+  /**
+   * It gets a document from the database and sets the state of the post to the data of the document.
+   */
   const getOne = async (id) => {
     try {
-      const docRef = doc(db, "blog", id);
+      const docRef = doc(db, "b", id);
       const docSnap = await getDoc(docRef);
       setPost(docSnap.data());
     } catch (error) {
@@ -111,7 +111,7 @@ const Blog = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-6 blog-left center">
+        <div className="col-sm-12 col-md-6 b-left center">
           <h1>Manejador de post's</h1>
           <Link to="/">
             <Button
@@ -122,11 +122,11 @@ const Blog = () => {
             />
           </Link>
         </div>
-        <div className="col-sm-12 col-md-6 blog-right"></div>
-        <div className="col-sm-12 col-md-12 blog-bottom pt-5">
+        <div className="col-sm-12 col-md-6 b-right"></div>
+        <div className="col-sm-12 col-md-12 b-bottom pt-5">
           <Tabs>
             <div label="Registrar posts">
-              <form onSubmit={savePosts}>
+              <form onSubmit={savePosts} noValidate>
                 <div className="form-group pt-3">
                   <Input
                     titleLabel="form-label label-inmersive-blue"
@@ -138,7 +138,6 @@ const Blog = () => {
                     id="title"
                     value={post.title}
                     onChange={handleInputs}
-                    required
                   />
                 </div>
                 <div className="form-group pt-3">
@@ -152,7 +151,6 @@ const Blog = () => {
                     id="category"
                     value={post.category}
                     onChange={handleInputs}
-                    required
                   />
                 </div>
                 <div className="form-group pt-3">
@@ -166,7 +164,6 @@ const Blog = () => {
                     id="content"
                     value={post.content}
                     onChange={handleInputs}
-                    required
                   />
                 </div>
                 <div className="form-group pt-3">

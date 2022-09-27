@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import Card from "../../../User_Interface/Organisms/Card/Card";
 import { Button } from "../../../Indexes/AtomsIndexes";
 import CV from "../../../../assets/images/jpg/cv.jpg";

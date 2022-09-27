@@ -101,7 +101,7 @@ const CMS_faqs = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12 col-md-6 faqs-left center">
-          <h1>Manejador de preguntas frecuentes</h1>
+          <h1>Manejador de FAQs</h1>
           <Link to="/">
             <Button
               id="button"
@@ -156,10 +156,12 @@ const CMS_faqs = () => {
                 <div className="table-responsive-xxl">
                   <table className="table table-hover">
                     <thead>
-                      <th>#</th>
-                      <th>Pregunta</th>
-                      <th>Respuesta</th>
-                      <th>Acciones</th>
+                      <tr>
+                        <th>#</th>
+                        <th>Pregunta</th>
+                        <th>Respuesta</th>
+                        <th>Acciones</th>
+                      </tr>
                     </thead>
                     <tbody>
                       {lista.map((list) => (

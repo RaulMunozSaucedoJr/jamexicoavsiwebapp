@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./frontend/assets/Scss/Styles.css";
+import { BottomNavbar } from "./frontend/components/Indexes/OrganismsIndex";
 import {
   Jobs,
   Posts,
@@ -17,9 +17,11 @@ import {
   CmsTips,
   Recover,
 } from "./frontend/components/Indexes/PagesIndex";
-import { BottomNavbar } from "./frontend/components/Indexes/OrganismsIndex";
-import { AuthContextProvider } from "./frontend/context/AuthContext.js";
+import CMSResume from "./frontend/components/pages/User_View/CMS_Resumes/CMSResume";
+import PantallaChat from "./frontend/components/pages/User_View/Chat/PantallaChat";
+import "./frontend/assets/Scss/Styles.css";
 import Protected from "./frontend/components/Protected.js";
+import { AuthContextProvider } from "./frontend/context/AuthContext.js";
 import app from "./backend/Firebase/Firebase-config.js";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -28,7 +30,6 @@ const firestore = getFirestore(app);
 
 const App = () => {
   const [user, setUser] = useState(null);
-
   async function getRol(uid) {
     const docuRef = doc(firestore, `usuarios/${uid}`);
     const docuCifrada = await getDoc(docuRef);
@@ -36,7 +37,7 @@ const App = () => {
     return infoFinal;
   }
 
-  function setUserWithFirebaseAndRol(usuarioFirebase) {
+  const setUserWithFirebaseAndRol = (usuarioFirebase) => {
     getRol(usuarioFirebase.uid).then((rol) => {
       const userData = {
         uid: usuarioFirebase.uid,
@@ -46,11 +47,12 @@ const App = () => {
       setUser(userData);
       console.log("userData fianl", userData);
     });
-  }
+  };
 
   onAuthStateChanged(auth, (usuarioFirebase) => {
     if (usuarioFirebase) {
       //funcion final
+
       if (!user) {
         setUserWithFirebaseAndRol(usuarioFirebase);
       }
@@ -63,11 +65,9 @@ const App = () => {
     <div>
       <AuthContextProvider>
         <BottomNavbar />
-        {user ? <Home user={user} /> : <Login />}
         <Routes>
-          <Route path="/Home" element={<Home />} />
+          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Login" element={<Login />} />}
           <Route path="*" element={<Error404 />} />
-          <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Recover" element={<Recover />} />
           <Route path="/Posts" element={<Posts />} />
@@ -104,6 +104,22 @@ const App = () => {
             element={
               <Protected>
                 <CmsFaqs />
+              </Protected>
+            }
+          />
+          <Route
+            path="/CmsResume"
+            element={
+              <Protected>
+                <CMSResume />
+              </Protected>
+            }
+          />
+          <Route
+            path="/PantallaChat"
+            element={
+              <Protected>
+                <PantallaChat />
               </Protected>
             }
           />

@@ -1,3 +1,5 @@
+@use '../Utilities/Common/Colors'as color;
+
 .center {
     display: grid;
     place-content: center;
@@ -24,4 +26,8 @@
     width: 17em;
     width: 17em;
     border-radius: 0;
+}
+
+.important{
+    color: color.$Inmersive_Red;
 }

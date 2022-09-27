@@ -21,14 +21,14 @@
     &-filter,
     &-open {
         background-color: color.$Empowered_Yellow;
-        @include text(font.$Montserrat, font_size.$Medium, color.$Inmersive_Blue_Black);
+        @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
         text-align: center;
         transition: .2s ease-in-out;
 
         &:hover {
             background-color: color.$Empowered_Yellow;
             transition: .2s ease-in-out;
-            @include text(font.$Montserrat, font_size.$Medium, color.$Inmersive_Blue_Black);
+            @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
             cursor: pointer;
         }
     }
@@ -43,17 +43,6 @@
             @include text(font.$Montserrat, font_size.$Medium, color.$White);
             border: color.$White solid .2rem;
             background-color: transparent;
-            cursor: pointer;
-        }
-    }
-
-    &-close {
-        background-color: transparent;
-        border: color.$White solid .2em;
-        @include text(font.$Montserrat, font_size.$Small, color.$White);
-
-        &:hover {
-            transition: .2s ease-in-out;
             cursor: pointer;
         }
     }
@@ -88,26 +77,26 @@
 
     &-facebook {
         background-color: color.$Facebook;
-        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+        @include text(font.$Montserrat, font_size.$Small, color.$White);
         text-align: center;
 
         &:hover {
             background-color: color.$Facebook;
             transition: .2s ease-in-out;
-            @include text(font.$Montserrat, font_size.$Medium, color.$White);
+            @include text(font.$Montserrat, font_size.$Small, color.$White);
             cursor: pointer;
         }
     }
 
     &-google {
         background-color: color.$Google;
-        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+        @include text(font.$Montserrat, font_size.$Small, color.$White);
         text-align: center;
 
         &:hover {
             background-color: color.$Google;
             transition: .2s ease-in-out;
-            @include text(font.$Montserrat, font_size.$Medium, color.$White);
+            @include text(font.$Montserrat, font_size.$Small, color.$White);
             cursor: pointer;
         }
     }
@@ -123,7 +112,7 @@
     }
 
     &-transparent {
-        @include text(font.$Montserrat, font_size.$Medium, color.$White);
+        @include text(font.$Montserrat, font_size.$Small, color.$White);
     }
 
     @media only screen and (max-width: 37.5em) {
@@ -147,17 +136,6 @@
                     background-color: color.$Empowered_Yellow;
                     transition: .2s ease-in-out;
                     @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
-                    cursor: pointer;
-                }
-            }
-
-            &-close {
-                background-color: transparent;
-                border: color.$White solid .2em;
-                @include text(font.$Montserrat, font_size.$Small, color.$White);
-
-                &:hover {
-                    transition: .2s ease-in-out;
                     cursor: pointer;
                 }
             }
@@ -198,38 +176,11 @@
                 z-index: 1;
             }
 
-        }
-    }
-
-}
-
-@media only screen and (max-width: 600px) {
-    .btn {
-        width: 100%;
-        height: auto;
-        border-radius: .5em;
-        text-align: center;
-
-        &-login {
-            background-color: color.$Empowered_Yellow;
-            @include text(font.$Montserrat, font_size.$Extra_Small, color.$Inmersive_Blue_Black);
-            text-align: center;
-        }
-
-        &-submit,
-        &-filter,
-        &-open {
-            background-color: color.$Empowered_Yellow;
-            @include text(font.$Montserrat, font_size.$Small, color.$Inmersive_Blue_Black);
-            text-align: center;
-            transition: .2s ease-in-out;
-
-            &:hover {
-                background-color: color.$Empowered_Yellow;
-                transition: .2s ease-in-out;
-                @include text(font.$Montserrat, font_size.$Extra_Small, color.$Inmersive_Blue_Black);
-                cursor: pointer;
+            &-transparent {
+                @include text(font.$Montserrat, font_size.$Small, color.$White);
             }
+
         }
     }
+
 }

@@ -161,14 +161,16 @@ const Tips = () => {
               </form>
             </div>
             <div label="Tabla de tips">
-              <div class="table-responsive-xxl">
-                <table class="table table-hover">
+              <div className="table-responsive-xxl">
+                <table className="table table-hover">
                   <thead>
-                    <th>#</th>
-                    <th>Titulo</th>
-                    <th>Categoria</th>
-                    <th>Descripcion</th>
-                    <th>Acciones</th>
+                    <tr>
+                      <th>#</th>
+                      <th>Titulo</th>
+                      <th>Categoria</th>
+                      <th>Descripcion</th>
+                      <th>Acciones</th>
+                    </tr>
                   </thead>
                   <tbody>
                     {lista.map((list) => (

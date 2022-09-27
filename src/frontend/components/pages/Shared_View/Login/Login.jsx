@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../../Indexes/AtomsIndexes";
+import { useNavigate } from "react-router-dom";
+import { Input, Button } from "../../../Indexes/AtomsIndexes";
 import app from "../../../../../backend/Firebase/Firebase-config.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-/*import { UserAuth } from "../../../../context/AuthContext.js";
-import { signInWithPopup, FacebookAuthProvider } from "firebase/auth";*/
+import { getFirestore, doc, collection, setDoc } from "firebase/firestore";
+import { signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import { UserAuth } from "../../../../context/AuthContext.js";
+//import { auth } from "../../../../../backend/Firebase/Firebase-config.js";
 const auth = getAuth(app);
 
 const Login = () => {
@@ -40,15 +41,13 @@ const Login = () => {
     console.log("submit", email, password, rol);
 
     if (isRegistrando) {
-      // registrar
       registrarUsuario(email, password, rol);
     } else {
-      // login
       signInWithEmailAndPassword(auth, email, password);
     }
   }
 
-  /*const { googleSignIn, user } = UserAuth();
+  const { googleSignIn, user } = UserAuth();
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
@@ -80,15 +79,15 @@ const Login = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  };*/
+  };
 
   return (
     <div>
-      <div className="container-fluid login">
+      <div className="container-fluid">
         <div className="row">
           <div className="col-sm-12 col-md-6 login-left">
             <div className="row">
-              <div className="col-12 center pt-5">
+              <div className="col-12 center pt-3">
                 <h1>{isRegistrando ? "Regístrate" : "Inicia sesión"}</h1>
               </div>
             </div>
@@ -96,53 +95,56 @@ const Login = () => {
               <div className="row">
                 <div className="col-12 pt-3">
                   <div className="form-group">
-                    <label className="text-white" htmlFor="email">
-                      Usuario
-                    </label>
-                    <input type="email" id="email" className="form-control" />
-                  </div>
-                </div>
-                <div className="col-12 pt-3">
-                  <div className="form-group">
-                    <label className="text-white" htmlFor="password">
-                      Contraseña
-                    </label>
-                    <input
-                      type="password"
-                      id="password"
+                    <Input
+                      titleLabel="form-label label-white"
+                      label="Correo electronico"
+                      placeholder="Correo electronico"
+                      type="email"
                       className="form-control"
-                      autoComplete="off"
+                      name="email"
+                      id="email"
+                      value=""
+                      required
                     />
                   </div>
                 </div>
                 <div className="col-12 pt-3">
-                  <label className="text-white" htmlFor="rol">
-                    Seleccione su rol
-                  </label>
-                  <select className="form-control" id="rol">
-                    <option value="admin">Administrador</option>
-                    <option value="user">Usuario</option>
-                  </select>
+                  <div className="form-group">
+                    <Input
+                      titleLabel="form-label label-white"
+                      label="Contraseña"
+                      placeholder="Contraseña"
+                      type="text"
+                      className="form-control"
+                      name="password"
+                      id="password"
+                      value=""
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="col-md-12 pt-3">
-                  <input
-                    className="btn btn-submit"
+                <div className="col-12 pt-3">
+                  <div className="form-group">
+                    <label htmlFor="rol" className="text-white">
+                      Seleccione su rol
+                    </label>
+                    <select className="form-control" id="rol">
+                      <option value="admin">Administrador</option>
+                      <option value="user">Usuario</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="col-md-12 pt-5">
+                  <Button
                     type="submit"
+                    className="btn btn-submit"
                     value={isRegistrando ? "Registrar" : "Iniciar sesión"}
+                    text={isRegistrando ? "Registrar" : "Iniciar sesión"}
                   />
                 </div>
               </div>
             </form>
-            <div className="col-12 pt-4">
-              <Button
-                className="btn btn-submit"
-                onClick={() => setIsRegistrando(!isRegistrando)}
-                text={
-                  isRegistrando ? "Ya tengo una cuenta" : "Quiero registrarme"
-                }
-              />
-            </div>
-            {/*<div className="col-sm-12 col-md-12 pt-2">
+            <div className="col-sm-12 col-md-6 pt-3">
               <Button
                 id="modal"
                 text="Google"
@@ -150,6 +152,8 @@ const Login = () => {
                 type="button"
                 onClick={handleGoogleSignIn}
               />
+            </div>
+            <div className="col-sm-12 col-md-6 pt-3">
               <Button
                 id="modal"
                 text="Facebook"
@@ -157,9 +161,14 @@ const Login = () => {
                 type="button"
                 onClick={signInWithFacebook}
               />
-            </div>*/}
-            <div className="col-md-12 center pt-4">
-              <Link to="/">Regresar al Home</Link>
+            </div>
+            <div className="col-sm-12 col-md-6 pt-3">
+              <button
+                className="btn btn-submit"
+                onClick={() => setIsRegistrando(!isRegistrando)}
+              >
+                {isRegistrando ? "Ya tengo una cuenta" : "Quiero registrarme"}
+              </button>
             </div>
           </div>
           <div className="col-sm-12 col-md-6 login-right"></div>

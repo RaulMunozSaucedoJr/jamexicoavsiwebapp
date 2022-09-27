@@ -208,8 +208,8 @@ const User_profile = () => {
               </form>
             </div>
             <div label="Tabla de usuarios">
-              <div class="table-responsive">
-                <table class="table table-hover">
+              <div className="table-responsive">
+                <table className="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">#</th>

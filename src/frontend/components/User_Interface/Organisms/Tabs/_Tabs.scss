@@ -10,6 +10,7 @@
     background-color: transparent;
     color: white;
     border: color.$Inmersive_Blue_Black solid .2em;
+    border-radius: 1em;
 }
 
 .tab-list-item {
@@ -22,14 +23,15 @@
     text-align: center;
     color: color.$Inmersive_Blue_Black;
     font-weight: bold;
+    border-radius: 1em;
 }
 
 .tab-content {
     width: 100%;
     height: auto;
     border: color.$Inmersive_Blue_Black solid .2em;
-    @include padding(padding.$Padding_half);
-    overflow: hidden;
+    @include padding(padding.$Padding1);
+    border-radius: 1em;
 }
 
 .tab-list-active {

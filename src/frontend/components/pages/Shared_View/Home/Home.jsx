@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Card from "../../../User_Interface/Organisms/Card/Card";
-import { Button } from "../../../Indexes/AtomsIndexes";
-import UserView from "../../UserView";
 import AdminView from "../../AdminView";
+import UserView from "../../UserView";
+import Card from "../../../User_Interface/Organisms/Card/Card";
 import Blog from "../../../../assets/images/jpg/Blog.jpg";
 import Job from "../../../../assets/images/jpg/Job.jpg";
 import Tips from "../../../../assets/images/jpg/Tips.jpg";
@@ -12,48 +11,20 @@ import CV from "../../../../assets/images/jpg/cv.jpg";
 
 import app from "../../../../../backend/Firebase/Firebase-config.js";
 import { getAuth, signOut } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 const Home = ({ user }) => {
-  
-  const [lista, setList] = useState([]);
-  useEffect(() => {
-    const getList = async () => {
-      try {
-        const querySnapshot = await getDocs(
-          collection(db, "preguntasyrespuestas")
-        );
-        const docs = [];
-        querySnapshot.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id });
-        });
-        setList(docs);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getList();
-  }, [lista]);
-
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-12 col-md-6 about-us-left center">
-          <div className="row">
-            <div className="col-12 sticky-top">
-              <div className="alert alert-success" role="alert">
-                {user.rol === "admin" ? <AdminView /> : <UserView />}
-                <Button
-                  className="btn btn-open"
-                  onClick={() => signOut(auth)}
-                  text="Logout"
-                />
-              </div>
-            </div>
+        <div className="col-12">
+          <div className="alert alert-success" role="alert">
+            <button onClick={() => signOut(auth)}> Cerrar sesión</button>
+            {user.rol === "admin" ? <AdminView /> : <UserView />}
           </div>
+        </div>
 
+        <div className="col-sm-12 col-md-6 about-us-left center">
           <h1>Juventudes</h1>
           <p>
             Somos una plataforma encargada de apoyar a los jovenes su primer

@@ -182,8 +182,8 @@ const Employments = () => {
               </form>
             </div>
             <div label="Tabla de trabajos">
-              <div class="table-responsive-xxl">
-                <table class="table table-hover">
+              <div className="table-responsive-xxl">
+                <table className="table table-hover">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
