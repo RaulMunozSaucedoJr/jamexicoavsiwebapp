@@ -9,7 +9,6 @@ import {
   Error404,
   Home,
   Login,
-  Register,
   CmsBlog,
   CmsEmployments,
   CmsFaqs,
@@ -66,14 +65,13 @@ const App = () => {
       <AuthContextProvider>
         <BottomNavbar />
         <Routes>
-          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Login" element={<Login />} />}
           <Route path="*" element={<Error404 />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Recover" element={<Recover />} />
-          <Route path="/Posts" element={<Posts />} />
-          <Route path="/Jobs" element={<Jobs />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/Tips" element={<Tips />} />
+          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Login" element={<Login />} />}
+          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Recover" element={<Recover />} />}
+          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Posts" element={<Posts />} />}
+          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Jobs" element={<Jobs />} />}
+          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Profile" element={<Profile />} />}
+          {user ? <Route path="/" element={<Home user={user} />} /> : <Route path="/Tips" element={<Tips />} />}
           <Route
             path="/CmsBlog"
             element={

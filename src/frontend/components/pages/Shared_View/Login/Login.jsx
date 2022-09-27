@@ -87,43 +87,38 @@ const Login = () => {
         <div className="row">
           <div className="col-sm-12 col-md-6 login-left">
             <div className="row">
-              <div className="col-12 center pt-3">
+              <div className="col-12 center pt-5">
                 <h1>{isRegistrando ? "Regístrate" : "Inicia sesión"}</h1>
               </div>
             </div>
             <form onSubmit={submitHandler}>
               <div className="row">
-                <div className="col-12 pt-3">
+                <div className="col-12 pt-5">
                   <div className="form-group">
-                    <Input
-                      titleLabel="form-label label-white"
-                      label="Correo electronico"
+                    <input
                       placeholder="Correo electronico"
                       type="email"
                       className="form-control"
                       name="email"
                       id="email"
-                      value=""
                       required
                     />
                   </div>
                 </div>
-                <div className="col-12 pt-3">
+                <div className="col-12 pt-5">
                   <div className="form-group">
-                    <Input
-                      titleLabel="form-label label-white"
-                      label="Contraseña"
+                    <input
                       placeholder="Contraseña"
-                      type="text"
+                      type="password"
                       className="form-control"
                       name="password"
                       id="password"
-                      value=""
+                      autoComplete="off"
                       required
                     />
                   </div>
                 </div>
-                <div className="col-12 pt-3">
+                <div className="col-12 pt-5">
                   <div className="form-group">
                     <label htmlFor="rol" className="text-white">
                       Seleccione su rol
